@@ -18,9 +18,23 @@ fn setup(
     mut materials: ResMut<Assets<CustomMaterial>>,
 ) {
     // cube
+    // commands.spawn(MaterialMeshBundle {
+    //     mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
+    //     transform: Transform::from_xyz(0.0, 0.5, 0.0),
+    //     material: materials.add(CustomMaterial {}),
+    //     ..default()
+    // });
+
+    // sphere
     commands.spawn(MaterialMeshBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        transform: Transform::from_xyz(0.0, 0.5, 0.0),
+        mesh: meshes.add(
+            Mesh::try_from(shape::Icosphere {
+                radius: 1.0,
+                subdivisions: 4,
+            })
+            .unwrap(),
+        ),
+        transform: Transform::from_xyz(0.0, 0.0, 0.0),
         material: materials.add(CustomMaterial {}),
         ..default()
     });
